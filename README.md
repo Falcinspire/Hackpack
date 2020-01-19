@@ -4,6 +4,8 @@
 # Disclaimer
 
 This software is in alpha. Use with a salt of caution.
+Readme documentation may fall out of date with the latest releases.
+More error checking and logging output will be added in later releases.
 
 ## Quick Start
 
