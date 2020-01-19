@@ -25,13 +25,12 @@ hackpack --config=hackpack/config --output=hackpack/hackpack
 
 ## Configuration
 
-To see what options are available, run 
+To see what options are available, generate a default config file with 
 ```sh
 hackpack --init
 ``` 
-in the root of a project and look at the hackpack.toml file 
-generated. Comments should explain each option.
-Not every option must be overriden; options that are not mentioned in the .toml file are given their default values.
+(run from the root of a project). Comments should explain each one.
+Not every option must be overriden; ones that are not mentioned in the .toml file are given their default values.
 
 ## Example configuration
 ```toml
