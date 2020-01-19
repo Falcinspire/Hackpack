@@ -52,13 +52,13 @@ func (builder *Builder) AppendTitle(name string, lookup string) {
 	_, unitSize := builder.pdf.GetFontSize()
 	builder.pdf.SetTextColor(0, 0, 0)
 	builder.pdf.Write(unitSize, name)
+	builder.index = append(builder.index, &indexElement{lookup, builder.pdf.PageNo()})
 	builder.pdf.Write(unitSize, "\n")
 	builder.pdf.SetDrawColor(100, 100, 100)
 	builder.pdf.Line(builder.pdf.GetX()-0.5, builder.pdf.GetY()+1.0, builder.pdf.GetX()+builder.pdf.GetStringWidth(name)+1.0, builder.pdf.GetY()+1.0)
 	builder.pdf.SetFont("Courier", "", builder.codeSize)
 	_, unitSize = builder.pdf.GetFontSize()
 	builder.pdf.Write(unitSize, "\n")
-	builder.index = append(builder.index, &indexElement{lookup, builder.pdf.PageNo()})
 }
 
 func (builder *Builder) AppendCode(line []*lex.ColoredElement) {
@@ -128,7 +128,7 @@ func (builder *Builder) header() {
 	pdf.SetTopMargin(0)
 	pdf.SetFont("Arial", "B", 12)
 	pdf.SetTextColor(0, 0, 0)
-	pdf.SetXY(10, 7)
+	pdf.SetXY(10, 5)
 	_, unitSize := pdf.GetFontSize()
 	pdf.Write(unitSize, builder.headerText)
 	pdf.Write(unitSize, "\n")
@@ -145,19 +145,18 @@ func (builder *Builder) footer() {
 	pdf := builder.pdf
 	pdf.SetLeftMargin(HORIZONTAL_MARGIN)
 	pdf.SetRightMargin(HORIZONTAL_MARGIN)
-	pdf.SetY(-10)
+	pdf.SetY(-7)
 	pdf.SetX(-10)
 	pdf.SetFont("Arial", "", 7)
 	_, unitSize := pdf.GetFontSize()
 	pdf.SetTextColor(0, 0, 0)
 	pdf.Write(unitSize, strconv.Itoa(pdf.PageNo()))
-
-	builder.alignColumn(0) // TODO this needs to be here until margins are fixed
 }
 
 func (builder *Builder) acceptPageBreak() bool {
 	if builder.columnIndex+1 == builder.columnCount {
-		// builder.alignColumn(0)
+		builder.alignColumn(0)
+		// builder.drawColumn(0)
 		return true
 	}
 	builder.columnIndex++
