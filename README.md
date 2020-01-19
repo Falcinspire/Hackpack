@@ -1,6 +1,10 @@
 # Hackpack
 **Generates a "hackpack" for competitive programmers**
 
+# Disclaimer
+
+This software is in alpha. Use with a salt of caution.
+
 ## Quick Start
 
 Download the Windows executable from releases. Move this file somewhere that is seen by the PATH system variable. 
