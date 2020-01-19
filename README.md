@@ -8,22 +8,29 @@ This software is in alpha. Use with a salt of caution.
 ## Quick Start
 
 Download the Windows executable from releases. Move this file somewhere that is seen by the PATH system variable. 
-Then simply execute `hackpack` from the root of a project, and a .pdf will automatically be generated.
+Then simply execute 
+```sh
+hackpack
+``` 
+from the root of a project, and a .pdf will automatically be generated.
 
 ## Command line arguments 
 
 The path to the settings file and the path to the output file can be changed with the flags *--config* and *--output*, respectively.
 Neither of these paths should include a file extension.
 More options can be found by `hackpack --help`.
-```
+```sh
 hackpack --config=hackpack/config --output=hackpack/hackpack
 ```
 
 ## Configuration
 
-To see what options are available, run `hackpack --init` in the root of a project and look at the hackpack.toml file 
-generated. Comments should explain each option.
-Not every option must be overriden; options that are not mentioned in the .toml file are given their default values.
+To see what options are available, generate a default config file with 
+```sh
+hackpack --init
+``` 
+(run from the root of a project). Comments should explain each one.
+Not every option must be overriden; ones that are not mentioned in the .toml file are given their default values.
 
 ## Example configuration
 ```toml
