@@ -1,0 +1,4 @@
+*.exe
+out.txt
+*.pdf
+*.toml
