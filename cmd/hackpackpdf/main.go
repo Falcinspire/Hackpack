@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/falcinspire/hackpack/internal/app"
-	"github.com/falcinspire/hackpack/internal/lex"
-	"github.com/falcinspire/hackpack/internal/settings"
+	"github.com/falcinspire/hackpackpdf/internal/app"
+	"github.com/falcinspire/hackpackpdf/internal/lex"
+	"github.com/falcinspire/hackpackpdf/internal/settings"
 )
 
 func main() {

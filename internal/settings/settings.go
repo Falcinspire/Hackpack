@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/falcinspire/hackpack/internal/resource"
+	"github.com/falcinspire/hackpackpdf/internal/resource"
 	"github.com/pelletier/go-toml"
 )
 

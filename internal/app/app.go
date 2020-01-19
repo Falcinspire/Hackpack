@@ -6,12 +6,12 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/falcinspire/hackpack/internal/build"
-	"github.com/falcinspire/hackpack/internal/fileprovide"
-	"github.com/falcinspire/hackpack/internal/lex"
-	"github.com/falcinspire/hackpack/internal/post"
-	"github.com/falcinspire/hackpack/internal/reformat"
-	"github.com/falcinspire/hackpack/internal/settings"
+	"github.com/falcinspire/hackpackpdf/internal/build"
+	"github.com/falcinspire/hackpackpdf/internal/fileprovide"
+	"github.com/falcinspire/hackpackpdf/internal/lex"
+	"github.com/falcinspire/hackpackpdf/internal/post"
+	"github.com/falcinspire/hackpackpdf/internal/reformat"
+	"github.com/falcinspire/hackpackpdf/internal/settings"
 )
 
 func CompileHackpack(configPath, outputPath string) error {

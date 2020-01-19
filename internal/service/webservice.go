@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/falcinspire/hackpack/internal/app"
+	"github.com/falcinspire/hackpackpdf/internal/app"
 )
 
 var lastRequest time.Time

@@ -3,7 +3,7 @@ package post
 import (
 	"strings"
 
-	"github.com/falcinspire/hackpack/internal/lex"
+	"github.com/falcinspire/hackpackpdf/internal/lex"
 )
 
 const ROW_MAX_CHARS = 60

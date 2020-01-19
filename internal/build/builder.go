@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/falcinspire/hackpack/internal/lex"
+	"github.com/falcinspire/hackpackpdf/internal/lex"
 	"github.com/jung-kurt/gofpdf"
 )
 
