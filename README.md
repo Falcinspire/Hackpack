@@ -73,5 +73,7 @@ header_font_size = 10.0
 index_font_size = 8.0
 ```
 
+# Example output
+
 ![Sample Body Page](sample_body.png)
 ![Sample Index Page](sample_index.png)
