@@ -1,5 +1,5 @@
 FROM alpine
 WORKDIR /app
-COPY service /app
+COPY build/service /app
 EXPOSE 80
 ENTRYPOINT ["./service"]
