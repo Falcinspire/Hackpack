@@ -82,7 +82,7 @@ func acceptZip(w http.ResponseWriter, req *http.Request) error {
 }
 
 func processZip() {
-	err := app.CompileHackpack(".", ".")
+	err := app.CompileHackpack("hackpack.toml", "hackpack.pdf")
 	if err != nil {
 		panic(err)
 	}
