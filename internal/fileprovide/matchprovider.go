@@ -1,6 +1,7 @@
 package fileprovide
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -68,7 +69,10 @@ func (walker *MatchWalker) Walk(path string, info os.FileInfo, err error) error 
 		if err != nil {
 			panic(err)
 		}
+		fmt.Println("++ " + path)
 		walker.paths = append(walker.paths, rel)
+	} else {
+		fmt.Println("-- " + path)
 	}
 	return nil
 }
