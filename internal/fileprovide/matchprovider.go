@@ -57,7 +57,6 @@ func (walker *MatchWalker) dontIgnore(path string) bool {
 }
 
 func (walker *MatchWalker) Walk(path string, info os.FileInfo, err error) error {
-	fmt.Println("Walk " + path)
 	ext := filepath.Ext(path)
 	if ext == "" {
 		return nil

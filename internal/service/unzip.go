@@ -5,6 +5,7 @@ package service
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -76,6 +77,7 @@ func unzipWeb(archive io.ReaderAt, size int64, target string) error {
 		}
 		defer targetFile.Close()
 
+		fmt.Println("Unzipping file " + targetFile.Name())
 		if _, err := io.Copy(targetFile, fileReader); err != nil {
 			return err
 		}
