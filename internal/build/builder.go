@@ -47,6 +47,10 @@ func New(headerText string, codeSize float64, headerSize float64, indexSize floa
 	return builder
 }
 
+func (builder *Builder) PageNo() int {
+	return builder.pdf.PageNo()
+}
+
 func (builder *Builder) AppendTitle(name string, lookup string) {
 	builder.pdf.SetFont("Courier", "", builder.headerSize)
 	_, unitSize := builder.pdf.GetFontSize()

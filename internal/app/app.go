@@ -1,9 +1,12 @@
 package app
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/falcinspire/hackpackpdf/internal/build"
@@ -15,14 +18,12 @@ import (
 )
 
 func CompileHackpack(configPath, outputPath string) error {
-	var config *settings.Settings
+	config := settings.GetDefault()
 	if _, err := os.Stat(configPath); err == nil {
-		config, err = settings.Read(configPath) //TODO Error handling?
+		err = settings.Read(configPath, config) //TODO Error handling?
 		if err != nil {
 			return err
 		}
-	} else {
-		config = settings.GetDefaultSettings()
 	}
 	builder := build.New(
 		config.Title,
@@ -38,19 +39,32 @@ func CompileHackpack(configPath, outputPath string) error {
 		return err
 	}
 
-	sourceset := fileprovide.Match(config.Source.Roots, ignore)
+	sourceset := make([]fileprovide.Source, 0)
+	for _, root := range config.Source.Roots {
+		fmt.Println("Looking for files in " + root)
+		sourceset = append(sourceset, fileprovide.Match(root, ignore)...)
+	}
+	fmt.Println("Sorting files")
+	sort.Slice(sourceset, func(i, j int) bool {
+		return strings.Compare(sourceset[i].Relative, sourceset[j].Relative) < 0
+	})
 	for _, source := range sourceset {
+		fmt.Println("Lexing " + source.Relative)
 		lexedSource := lex.FromFile(filepath.Join(source.Root, source.Relative), config.Theme)
+		fmt.Println("Processing " + source.Relative)
 		lexedLines := post.BreakIntoLines(lexedSource)
 		processedLines := post.Process(lexedLines, true)
 		sourceTitle := reformat.Name(removeExtension(source.Relative))
+		fmt.Println("Writing " + source.Relative)
 		builder.AppendTitle(sourceTitle, filepath.Join(filepath.Dir(source.Relative), sourceTitle))
 		for _, line := range processedLines {
 			builder.AppendCode(line)
 		}
 		builder.AppendLine()
 	}
+	fmt.Println("Pages written: " + strconv.Itoa(builder.PageNo()) + "; writing index")
 	builder.AppendIndex()
+	fmt.Println("Saving")
 	builder.SaveAndClose(outputPath)
 
 	return nil
@@ -60,6 +74,7 @@ func compileRegexes(raws []string) ([]*regexp.Regexp, error) {
 	ignore := make([]*regexp.Regexp, len(raws))
 	for i, reg := range raws {
 		var err error
+		fmt.Println("Compiling regex " + reg)
 		ignore[i], err = regexp.Compile(reg)
 		if err != nil {
 			return []*regexp.Regexp{}, err

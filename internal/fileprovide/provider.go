@@ -5,8 +5,6 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
-	"sort"
-	"strings"
 
 	"github.com/alecthomas/chroma/lexers"
 )
@@ -16,18 +14,13 @@ type Source struct {
 	Root     string
 }
 
-func Match(roots []string, ignoreExt []*regexp.Regexp) []Source {
+func Match(root string, ignoreExt []*regexp.Regexp) []Source {
 	paths := make([]Source, 0)
-	for _, root := range roots {
-		walker := MatchWalker{lexers.Names(true), ignoreExt, make([]string, 0), root}
-		filepath.Walk(root, walker.Walk)
-		for _, source := range walker.paths {
-			paths = append(paths, Source{source, root})
-		}
+	walker := MatchWalker{lexers.Names(true), ignoreExt, make([]string, 0), root}
+	filepath.Walk(root, walker.Walk)
+	for _, source := range walker.paths {
+		paths = append(paths, Source{source, root})
 	}
-	sort.Slice(paths, func(i, j int) bool {
-		return strings.Compare(paths[i].Relative, paths[j].Relative) < 0
-	})
 	return paths
 }
 

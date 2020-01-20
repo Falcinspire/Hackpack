@@ -28,25 +28,23 @@ type PageLayout struct {
 	Index   float64 `toml:"index_font_size"`
 }
 
-func Read(path string) (*Settings, error) {
-	settings := GetDefaultSettings()
-
+func Read(path string, settings *Settings) error {
 	file, err := os.Open(path)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	bytes, err := ioutil.ReadAll(file)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	err = toml.Unmarshal(bytes, settings)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return settings, nil
+	return nil
 }
 
-func GetDefaultSettings() *Settings {
+func GetDefault() *Settings {
 	return &Settings{
 		Title: "Hackpack",
 		Theme: "colorful",
