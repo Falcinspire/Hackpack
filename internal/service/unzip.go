@@ -49,6 +49,7 @@ import (
 // }
 
 func unzipWeb(archive io.ReaderAt, size int64, target string) error {
+	fmt.Printf("Zip file size: %d\n", size)
 	reader, err := zip.NewReader(archive, size)
 	if err != nil {
 		return err
@@ -71,6 +72,8 @@ func unzipWeb(archive io.ReaderAt, size int64, target string) error {
 		}
 		defer fileReader.Close()
 
+		// Next line added by me
+		os.MkdirAll(filepath.Dir(file.Name), 0755) // TODO magic value
 		targetFile, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode())
 		if err != nil {
 			return err

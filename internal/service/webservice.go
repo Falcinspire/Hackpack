@@ -69,7 +69,10 @@ func acceptZip(w http.ResponseWriter, req *http.Request) error {
 			return err
 		}
 		file.Seek(0, 0)
-		unzipWeb(file, size, ".")
+		err = unzipWeb(file, size, ".")
+		if err != nil {
+			panic(err)
+		}
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return err
